@@ -1,0 +1,323 @@
+Quest˜ao 1 Os padr˜oes de projeto tem o objetivo de criar solu¸c˜oes para problemas recorrentes durante a elabora¸c˜ao
+de um software. Verifique quais as afirmativas s˜ao verdadeiras e quais s˜ao falsas. Justifique porque as afirmativas
+falsas est˜ao erradas.
+1. Os padr˜oes de cria¸c˜ao se caracterizam pela maneira como as classes ou objetos interagem e distribuem responsabilidades entre si.
+2. Os elementos essenciais de um padr˜ao de projeto s˜ao: nome, problema, solu¸c˜ao e consequˆencia.
+3. Segundo a classifica¸c˜ao criada por GAMMA et al. (1995), os padr˜oes de projeto orientado a objetos podem
+ser classificados por somente dois grupos de finalidade: padr˜oes de cria¸c˜ao e padr˜oes comportamentais.
+4. Padr˜oes de projeto s˜ao solu¸c˜oes para problemas recorrentes durante a elabora¸c˜ao de um software, de forma
+ser poss´ıvel utiliz´a-lo diversas vezes.
+Resposta O primeiro e o terceiro item est˜ao incorretos. Os padr˜oes de projeto podem ser classificados em trˆes grupos
+de finalidade: padr˜oes de cria¸c˜ao, estrutural e comportamental. Os padr˜oes comportamentais se caracterizam pela
+maneira como as classes ou objetos interagem e distribuem responsabilidades.
+Quest˜ao 2 Descreva o padr˜ao de projeto Singleton e forne¸ca um exemplo de implementa¸c˜ao em Java.
+Resposta O padr˜ao Singleton ´e um padr˜ao de cria¸c˜ao que garante que uma classe tenha apenas uma ´unica instˆancia
+e fornece um ponto de acesso global para essa instˆancia. Um exemplo de implementa¸c˜ao em Java ´e a classe
+DatabaseConnection, que gerencia a conex˜ao com um banco de dados e garante que apenas uma ´unica instˆancia
+da conex˜ao exista durante toda a execu¸c˜ao do programa.
+Quest˜ao 3 Descreva o padr˜ao de projeto Observer e dˆe um exemplo de implementa¸c˜ao em Java.
+Resposta O padr˜ao Observer ´e um padr˜ao comportamental que estabelece uma rela¸c˜ao de um-para-muitos entre
+objetos, de modo que quando um objeto muda de estado, todos os objetos dependentes s˜ao notificados e atualizados
+automaticamente. Um exemplo de implementa¸c˜ao em Java ´e um sistema de notifica¸c˜oes, onde temos um objeto
+Subject que mant´em uma lista de objetos Observer registrados e notifica a todos eles quando ocorrem mudan¸cas
+de estado.
+1
+Quest˜ao 4 Descreva o padr˜ao de projeto Singleton e forne¸ca um exemplo de implementa¸c˜ao em Java.
+Resposta O padr˜ao de projeto Singleton ´e um padr˜ao de cria¸c˜ao que garante que uma classe tenha apenas uma
+´unica instˆancia e fornece um ponto de acesso global para essa instˆancia. O Singleton ´e ´util quando vocˆe precisa ter
+um ´unico objeto respons´avel por coordenar a¸c˜oes em todo o sistema.
+Um exemplo de implementa¸c˜ao do Singleton em Java ´e a classe Logger, que ´e respons´avel por registrar eventos
+e mensagens de log em uma aplica¸c˜ao. Veja como poderia ser implementado:
+1 public class Logger {
+2 private static Logger instance ;
+3 private List < String > logMessages ;
+4
+5 // Construtor privado para evitar a criacao de instancias atraves do operador ’new ’
+6 private Logger () {
+7 logMessages = new ArrayList < >() ;
+8 }
+9
+10 // Metodo estatico para obter a instancia unica do Logger
+11 public static Logger getInstance () {
+12 if ( instance == null ) {
+13 instance = new Logger () ;
+14 }
+15 return instance ;
+16 }
+17
+18 // Metodo para registrar uma mensagem de log
+19 public void logMessage ( String message ) {
+20 logMessages . add ( message ) ;
+21 System . out . println (" Log : " + message ) ;
+22 }
+23
+24 // Metodo para exibir todas as mensagens de log registradas
+25 public void displayLogs () {
+26 System . out . println (" Log Messages :") ;
+27 for ( String message : logMessages ) {
+28 System . out . println ( message ) ;
+29 }
+30 }
+31 }
+Nesse exemplo, a classe Logger possui um construtor privado para impedir a cria¸c˜ao de instˆancias por meio do
+operador new. Em vez disso, usamos o m´etodo est´atico getInstance() para obter a instˆancia ´unica do Logger. Na
+primeira chamada desse m´etodo, a instˆancia ´e criada e armazenada na vari´avel est´atica instance. Nas chamadas
+subsequentes, a instˆancia j´a existente ´e retornada.
+Assim, podemos usar o Logger em v´arias partes do c´odigo da seguinte maneira:
+1 Logger logger = Logger . getInstance () ;
+2 logger . logMessage (" Erro critico : Divisao por zero .");
+3 logger . logMessage (" Aviso : Arquivo nao encontrado .") ;
+4
+5 logger . displayLogs () ;
+Ao usar o padr˜ao Singleton, garantimos que todas as mensagens de log sejam registradas e exibidas por meio
+da mesma instˆancia do Logger em toda a aplica¸c˜ao.
+2
+Quest˜ao 5 Descreva o padr˜ao de projeto Template Method e forne¸ca um exemplo de implementa¸c˜ao em Java.
+Resposta O padr˜ao de projeto Template Method ´e um padr˜ao comportamental que define a estrutura b´asica de um
+algoritmo em uma classe base, enquanto permite que as subclasses especializem ou substituam partes espec´ıficas
+desse algoritmo sem alterar sua estrutura geral.
+Um exemplo de implementa¸c˜ao do Template Method em Java ´e uma classe abstrata Beverage que define o esqueleto
+de um algoritmo para preparar uma bebida quente. As subclasses concretas, como Coffee e Tea, podem implementar
+ou sobrescrever etapas espec´ıficas do processo de prepara¸c˜ao da bebida, como adicionar ingredientes ou ajustar a
+temperatura da ´agua.
+Veja como poderia ser implementado:
+1 public abstract class Beverage {
+2 // Metodo template que define a estrutura do algoritmo
+3 public final void prepareBeverage () {
+4 boilWater () ;
+5 brew () ;
+6 pourInCup () ;
+7 addCondiments () ;
+8 }
+9
+10 // Metodos abstratos que devem ser implementados pelas subclasses
+11 protected abstract void brew () ;
+12 protected abstract void addCondiments () ;
+13
+14 // Metodos comuns a todas as subclasses
+15 private void boilWater () {
+16 System . out . println (" Boiling water ") ;
+17 }
+18
+19 private void pourInCup () {
+20 System . out . println (" Pouring into cup ") ;
+21 }
+22 }
+Agora, vamos criar duas subclasses concretas: Coffee e Tea. Cada uma delas vai implementar as etapas
+espec´ıficas da prepara¸c˜ao da bebida:
+1 public class Coffee extends Beverage {
+2 @Override
+3 protected void brew () {
+4 System . out . println (" Brewing coffee ");
+5 }
+6
+7 @Override
+8 protected void addCondiments () {
+9 System . out . println (" Adding sugar and milk ");
+10 }
+11 }
+12
+13 public class Tea extends Beverage {
+14 @Override
+15 protected void brew () {
+16 System . out . println (" Steeping tea bag ") ;
+17 }
+18
+19 @Override
+20 protected void addCondiments () {
+21 System . out . println (" Adding lemon ");
+22 }
+23 }
+Agora, podemos usar as subclasses para preparar as bebidas:
+3
+1 public class Main {
+2 public static void main ( String [] args ) {
+3 Beverage coffee = new Coffee () ;
+4 coffee . prepareBeverage () ; // Preparando cafe
+5
+6 System . out . println () ;
+7
+8 Beverage tea = new Tea () ;
+9 tea . prepareBeverage () ; // Preparando cha
+10 }
+11 }
+O padr˜ao Template Method permite que a estrutura geral do algoritmo seja definida na classe base Beverage,
+enquanto as subclasses Coffee e Tea implementam ou sobrescrevem as etapas espec´ıficas de acordo com o tipo de
+bebida. Isso promove a reutiliza¸c˜ao de c´odigo e mant´em a estrutura geral consistente, permitindo que diferentes
+subclasses possam ter diferentes comportamentos em partes espec´ıficas do algoritmo.
+Quest˜ao 6 Descreva o padr˜ao de projeto Composite e forne¸ca um exemplo de implementa¸c˜ao em Java.
+Resposta O padr˜ao de projeto Composite ´e um padr˜ao estrutural que permite tratar objetos individuais e cole¸c˜oes
+de objetos de maneira uniforme. Ele permite que vocˆe construa uma estrutura hier´arquica de objetos em forma de
+´arvore, onde os objetos individuais e os grupos de objetos s˜ao tratados de forma semelhante.
+Um exemplo de implementa¸c˜ao do padr˜ao Composite em Java ´e uma estrutura de elementos gr´aficos, onde temos
+elementos simples, como c´ırculos e retˆangulos, e tamb´em grupos de elementos que podem conter outros elementos
+simples ou grupos. Podemos representar essa estrutura com uma interface Graphic e duas classes concretas: Circle
+e Group.
+Poss´ıvel implementa¸c˜ao:
+1 import java . util . ArrayList ;
+2 import java . util . List ;
+3
+4 public interface Graphic {
+5 void draw () ;
+6 }
+7
+8 public class Circle implements Graphic {
+9 public void draw () {
+10 System . out . println (" Drawing a circle ") ;
+11 }
+12 }
+13
+14 public class Group implements Graphic {
+15 private List < Graphic > graphics ;
+16
+17 public Group () {
+18 graphics = new ArrayList < >() ;
+19 }
+20
+21 public void add ( Graphic graphic ) {
+22 graphics . add ( graphic );
+23 }
+24
+25 public void remove ( Graphic graphic ) {
+26 graphics . remove ( graphic ) ;
+27 }
+28
+29 public void draw () {
+30 System . out . println (" Drawing a group ");
+31 for ( Graphic graphic : graphics ) {
+32 graphic . draw () ;
+33 }
+34 }
+35 }
+Agora, podemos criar uma estrutura gr´afica hier´arquica usando os elementos individuais e grupos:
+4
+1 import java . util . ArrayList ;
+2 import java . util . List ;
+3
+4 public interface Graphic {
+5 void draw () ;
+6 }
+7
+8 public class Circle implements Graphic {
+9 public void draw () {
+10 System . out . println (" Drawing a circle ") ;
+11 }
+12 }
+13
+14 public class Group implements Graphic {
+15 private List < Graphic > graphics ;
+16
+17 public Group () {
+18 graphics = new ArrayList < >() ;
+19 }
+20
+21 public void add ( Graphic graphic ) {
+22 graphics . add ( graphic );
+23 }
+24
+25 public void remove ( Graphic graphic ) {
+26 graphics . remove ( graphic ) ;
+27 }
+28
+29 public void draw () {
+30 System . out . println (" Drawing a group ");
+31 for ( Graphic graphic : graphics ) {
+32 graphic . draw () ;
+33 }
+34 }
+35 }
+No exemplo acima, criamos uma estrutura gr´afica hier´arquica com c´ırculos e grupos. O m´etodo draw() ´e
+chamado no grupo raiz, que, por sua vez, chama o m´etodo draw() em todos os elementos contidos nele, sejam eles
+grupos ou c´ırculos individuais. Isso permite que objetos individuais e grupos sejam tratados de maneira uniforme,
+seguindo a estrutura hier´arquica definida.
+5
+Quest˜ao 7 Descreva o padr˜ao de arquitetura MVC (Model-View-Controller) e forne¸ca um exemplo de implementa¸c˜ao em Java.
+Resposta O padr˜ao de arquitetura MVC ´e um padr˜ao de projeto que separa a l´ogica de neg´ocio, a apresenta¸c˜ao e
+a intera¸c˜ao do usu´ario em trˆes componentes principais: Model (modelo), View (visualiza¸c˜ao) e Controller (controlador). O objetivo ´e promover a separa¸c˜ao de preocupa¸c˜oes e tornar o c´odigo mais modular, flex´ıvel e reutiliz´avel.
+Um exemplo de implementa¸c˜ao do padr˜ao MVC em Java pode ser um aplicativo de lista de tarefas, onde temos o
+modelo que representa as tarefas, a visualiza¸c˜ao que exibe as tarefas na interface do usu´ario e o controlador que
+gerencia as intera¸c˜oes do usu´ario e atualiza o modelo e a visualiza¸c˜ao de acordo.
+Aqui est´a uma poss´ıvel implementa¸c˜ao:
+6
+1 // Modelo ( Model )
+2 public class Task {
+3 private String description ;
+4 private boolean completed ;
+5
+6 public Task ( String description ) {
+7 this . description = description ;
+8 this . completed = false ;
+9 }
+10
+11 public String getDescription () {
+12 return description ;
+13 }
+14
+15 public boolean isCompleted () {
+16 return completed ;
+17 }
+18
+19 public void setCompleted ( boolean completed ) {
+20 this . completed = completed ;
+21 }
+22 }
+23
+24 // Visualizacao ( View )
+25 public class TaskView {
+26 public void displayTasks ( List < Task > tasks ) {
+27 for ( Task task : tasks ) {
+28 System . out . println ( task . getDescription () + " - " + ( task . isCompleted () ? " Completed " : "
+Incomplete "));
+29 }
+30 }
+31 }
+32
+33 // Controlador ( Controller )
+34 public class TaskController {
+35 private List < Task > tasks ;
+36 private TaskView taskView ;
+37
+38 public TaskController () {
+39 tasks = new ArrayList < >() ;
+40 taskView = new TaskView () ;
+41 }
+42
+43 public void addTask ( String description ) {
+44 Task newTask = new Task ( description );
+45 tasks . add ( newTask );
+46 }
+47
+48 public void markTaskAsCompleted ( int index ) {
+49 if ( index >= 0 && index < tasks . size () ) {
+50 Task task = tasks . get ( index );
+51 task . setCompleted ( true );
+52 }
+53 }
+54
+55 public void displayTasks () {
+56 taskView . displayTasks ( tasks ) ;
+57 }
+58 }
+59
+60 // Classe principal
+61 public class Main {
+62 public static void main ( String [] args ) {
+63 TaskController taskController = new TaskController () ;
+64
+65 taskController . addTask ("Buy groceries ");
+66 taskController . addTask (" Clean the house ");
+67
+68 taskController . displayTasks () ;
+69
+70 taskController . markTaskAsCompleted (0) ;
+71
+72 taskController . displayTasks () ;
+73 }
+74 }
+Nesse exemplo, o modelo ´e representado pela classe Task, que cont´em informa¸c˜oes sobre uma tarefa. A visualiza¸c˜ao ´e representada pela classe TaskView, que exibe as tarefas na interface do usu´ario. O controlador ´e
+7
+representado pela classe TaskController, que gerencia as intera¸c˜oes do usu´ario, atualiza o modelo e solicita `a visualiza¸c˜ao que atualize a interface.
+Ao executar o c´odigo acima, as tarefas s˜ao adicionadas, exibidas, marcadas como conclu´ıdas e exibidas novamente.
+O padr˜ao MVC permite que as responsabilidades sejam divididas entre os componentes, facilitando a manuten¸c˜ao,
+a extensibilidade e a testabilidade do c´odigo.
+8

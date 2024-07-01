@@ -1,6 +1,6 @@
 package Calculadora;
 
-public class Calculadora {
+public class calculadora {
 
     // Método para somar dois números
     public static double somar(double a, double b) {
@@ -34,29 +34,29 @@ public class Calculadora {
         System.out.println("Testando a Calculadora");
 
         // Teste de soma
-        System.out.println("1 + 2 = " + Calculadora.somar(1, 2));
+        System.out.println("1 + 2 = " + calculadora.somar(1, 2));
 
         // Teste de subtração
-        System.out.println("5 - 3 = " + Calculadora.subtrair(5, 3));
+        System.out.println("5 - 3 = " + calculadora.subtrair(5, 3));
 
         // Teste de multiplicação
-        System.out.println("4 * 6 = " + Calculadora.multiplicar(4, 6));
+        System.out.println("4 * 6 = " + calculadora.multiplicar(4, 6));
 
         // Teste de divisão
         try {
-            System.out.println("8 / 2 = " + Calculadora.dividir(8, 2));
+            System.out.println("8 / 2 = " + calculadora.dividir(8, 2));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         // Teste de divisão por zero
         try {
-            System.out.println("8 / 0 = " + Calculadora.dividir(8, 0));
+            System.out.println("8 / 0 = " + calculadora.dividir(8, 0));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         // Teste de elevação à potência
-        System.out.println("2 ^ 3 = " + Calculadora.elevar(2, 3));
+        System.out.println("2 ^ 3 = " + calculadora.elevar(2, 3));
     }
 }
